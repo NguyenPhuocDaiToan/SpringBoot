@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit blog</title>
+    <link rel="stylesheet" href="/bootstrap-5.0.2/css/bootstrap.min.css">
+</head>
+<body>
+<form th:action="@{'/edit/' + ${blog.id}}" method="post" th:object="${blog}">
+    <div>
+        <label>Title</label>
+        <input type="text" th:field="*{title}">
+    </div>
+    <div>
+        <label>Content</label>
+        <input type="text" th:field="*{content}">
+    </div>
+    <div>
+        <label>Create day</label>
+        <input type="date" th:field="*{createDay}">
+    </div>
+    <div>
+        <label>Category</label>
+        <select th:field="*{category}">
+            <option th:each="category: ${categories}" th:text="${category.name}" th:value="${category.id}">
+            </option>
+        </select>
+    </div>
+    <button type="submit">Edit</button>
+</form>
+</body>
+</html>

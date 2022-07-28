@@ -1,0 +1,3 @@
+Project using JpaReository support CRUD
+Project complete a few functions: CRUD
+not applied yet: validate, paging and sorting, modal 

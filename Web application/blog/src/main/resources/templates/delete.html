@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete blog</title>
+  <link rel="stylesheet" href="/bootstrap-5.0.2/css/bootstrap.min.css">
+</head>
+<body>
+<form th:action="@{'/delete/' + ${blog.id}}" method="post">
+  <div>
+    <label>Title</label>
+    <span th:text="${blog.title}"></span>
+  </div>
+  <div>
+    <label>Content</label>
+    <span th:text="${blog.content}"></span>
+  </div>
+  <div>
+    <label>Create day</label>
+    <span th:text="${blog.createDay}"></span>
+  </div>
+  <div>
+    <label>Category</label>
+    <span th:text="${blog.category.name}"></span>
+  </div>
+  <button type="submit">Delete</button>
+</form>
+</body>
+</html>

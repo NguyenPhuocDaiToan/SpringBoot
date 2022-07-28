@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List blog</title>
+    <link rel="stylesheet" href="/bootstrap-5.0.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-danger text-center fw-bold mt-4 mb-4">List Blog</h1>
+        <a href="/create" class="btn btn-success mb-4">Create</a>
+        <table class="table table-striped">
+            <tr class="fw-bold bg-success">
+                <td>STT</td>
+                <td>Title</td>
+                <td>Content</td>
+                <td>Date Create</td>
+                <td>Category</td>
+                <td>Action</td>
+            </tr>
+
+            <tr th:each="blog, status: ${blogs}">
+                <td th:text="${status.count + blogs.number * 3}"></td>
+                <td th:text="${blog.title}"></td>
+                <td th:text="${blog.content}"></td>
+                <td th:text="${blog.createDay}"></td>
+                <td th:text="${blog.category.name}"></td>
+                <td>
+                    <a th:href="@{'/delete/' + ${blog.id}}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{'/edit/' + ${blog.id}}" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        </table>
+        <div>
+<!--             localhost:8080/?page=1                 -->
+<!--            Trang trước                             -->
+            <a th:href="@{'/'(page = ${blogs.number - 1})}" th:if="${blogs.hasPrevious()}">Previous</a>
+<!--            Trang hiện tại                          -->
+            <span th:text="${blogs.number + 1}"></span>
+            /
+            <span th:text="${blogs.totalPages}"></span>
+<!--            Trang sau                             -->
+            <a th:href="@{'/'(page = ${blogs.number + 1})}" th:if="${blogs.hasNext()}">Next</a>
+        </div>
+    </div>
+</body>
+</html>
