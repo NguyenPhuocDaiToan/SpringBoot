@@ -23,7 +23,8 @@ public class ProductController {
     @GetMapping()
     public ResponseEntity<List<Product>> getAll(){
         List<Product> products = productService.findAll();
+        if(products.isEmpty())
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
     }
-
 }

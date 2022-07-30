@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .product-image {
+            object-fit: cover;
+            max-width: 180px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center text-danger">Giỏ hàng của bạn</h1>
+    <a href="/" class="btn btn-primary">Quay trở về trang chủ</a>
+    <div th:each="product: ${cart.products}" class="row border my-2">
+        <div class="col-4">
+            <img th:src="${product.getKey().urlImage}" alt="Image lỗi" class="product-image">
+        </div>
+        <div class="col-8">
+            <p>Tên sản phẩm: <span th:text="${product.getKey().name}"></span></p>
+            <p>Mô tả: <span th:text="${product.getKey().description}"></span></p>
+            <p>Giá sản phẩm: <span th:text="${product.getKey().price}"></span></p>
+            <div>
+                <span>Số lượng: </span>
+                <a th:href="@{/sub/{id}(id = ${product.getKey().id}, page = 'shopping-cart')}" class="btn btn-warning">-</a>
+                <span th:text="${product.getValue()}"></span>
+                <a th:href="@{/add/{id}(id = ${product.getKey().id}, page = 'shopping-cart')}" class="btn btn-success">+</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+<!--/sub-->
+<!--@RequestParam Integer id-->
+<!--@RequestParam String page-->
+<!--?id=1&page=index-->
+<!--(id = 1, page = 'index')-->
+
+<!--/sub/{id}-->
+
+<!--/sub/1?page=index-->
+<!--(id = 1, page = 'index')-->
