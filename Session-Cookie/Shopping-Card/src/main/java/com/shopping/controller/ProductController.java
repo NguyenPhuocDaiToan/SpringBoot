@@ -5,9 +5,13 @@ import com.shopping.model.Cart;
 import com.shopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 @Controller
@@ -23,7 +27,10 @@ public class ProductController {
 
 
     @GetMapping({"/", "/index"})
-    public ModelAndView getIndex() {
+    public ModelAndView getIndex(@CookieValue String JSESSIONID, HttpServletResponse response, HttpServletRequest request) {
+        Cookie cookie = new Cookie("JSESSIONID", JSESSIONID);
+        cookie.setMaxAge(3 * 60);
+        response.addCookie(cookie);
         return new ModelAndView("index", "products", productService.findAll());
     }
 
